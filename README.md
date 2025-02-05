@@ -1,7 +1,7 @@
 
 FACIAL AND OBJECT DETECTION WEB-APP
 
-A webapp that takes camera feed and runs facial detection and weapon detection. API Endpoints will also created to allow for CRUD operations.
+A webapp that takes camera feed input and runs face and gun detection (for now). API Endpoints will also created to allow for CRUD operations.
 
 ## Run Locally
 
