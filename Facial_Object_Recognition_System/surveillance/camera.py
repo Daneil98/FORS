@@ -58,7 +58,7 @@ def gen_frames():
         """
         if gun_exist:
             print("Guns detected")
-            # Optional: Add additional handling logic here
+            #Add additional logic here
             pass """
             
         # Encode frame for streaming
