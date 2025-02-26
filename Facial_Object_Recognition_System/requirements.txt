@@ -1,6 +1,0 @@
-open-cv
-face_Recognition
-imutils
-numpy
-django
-python
