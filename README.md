@@ -1,7 +1,7 @@
 
-FACIAL AND OBJECT DETECTION WEB-APP
+FACIAL AND OBJECT RECOGNITION WEB-APP
 
-A webapp that takes camera feed and runs facial detection and weapon detection. API Endpoints will also created to allow for CRUD operations.
+A webapp that takes camera feed and runs facial recognition and weapon detection. API Endpoints will also created to allow for CRUD operations.
 
 ## Run Locally
 
@@ -14,7 +14,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd FACIAL_OBJECT_RECOGNITION_SYSTEM
+  cd FORS
 ```
 
 Install dependencies
