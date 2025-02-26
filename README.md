@@ -20,15 +20,7 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  pip install django
-  pip install python 
-  pip install numpy 
-  pip install postgresql
-  pip install djangorestframework
-  pip install celery
-  pip install open-cv
-  pip install face_Recognition
-  pip install imutils
+  pip install -r requirements.txt
 
 ```
 
@@ -52,4 +44,3 @@ To run this project, you will need to add the following environment variables to
 CELERY_BROKER_URL = ''
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
-
