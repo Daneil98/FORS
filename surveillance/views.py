@@ -10,9 +10,7 @@ from .models import Profile
 
 from .camera import gen_frames  # Import the frame generator function
 
-def video_feed(request):
-    # Return the video feed as an HTTP response
-    return StreamingHttpResponse(gen_frames(), content_type='multipart/x-mixed-replace; boundary=frame')
+
 
 # Create your views here.
 
@@ -65,11 +63,6 @@ def user_login(request):
 
 
 @login_required
-def dashboard(request):
-    return render(request, 'surveillance/dashboard.html')
-
-
-@login_required
 def edit(request):
 
     if request.method == 'POST':
@@ -83,9 +76,39 @@ def edit(request):
         user_form = UserEditForm(instance=request.user)
     return render(request, 'surveillance/edit.html', {'user_form': user_form, 'section': 'edit'})
 
+
+
+#SECURITY VIEWS
+
+
+@login_required
+def dashboard(request):
+    return render(request, 'surveillance/dashboard.html')
+
+
 @login_required
 def camera(request):
     return render(request, 'surveillance/camera.html')
 
 
+def video_feed(request):
+    # Return the video feed as an HTTP response
+    return StreamingHttpResponse(gen_frames(), content_type='multipart/x-mixed-replace; boundary=frame')
 
+
+def upload_person(request):
+    if request.method == 'POST':
+        form = UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            title = form.cleaned_data.get('name')
+            img = form.cleaned_data.get('photo1')
+            obj = Target.objects.create(name=title, photo1=img)
+            obj.save()
+            messages.success(request, 'Details successfully uploaded')
+        else:
+            messages.error(request, 'Error uploading details')
+    else:
+        form = UploadForm(request.POST)
+
+        
+    return render(request, 'surveillance/upload.html', {'form': form,})

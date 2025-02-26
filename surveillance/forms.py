@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from socket import fromshare
 from django.forms.widgets import DateInput
 from django.utils.translation import gettext_lazy as _
+from .models import *
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -25,3 +26,9 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name')
+        
+        
+class UploadForm(forms.ModelForm):
+    class Meta:
+        model = Target
+        fields = ('name', 'photo1', 'photo2', 'photo3')

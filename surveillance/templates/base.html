@@ -23,9 +23,15 @@
                         <li {% if section == "dashboard" %}class="selected"{% endif %}>
                             <a href="{% url "dashboard" %}">My dashboard</a>
                         </li>
+
                         <li {% if section == "camera" %}class="selected"{% endif %}>
                             <a href="{% url "camera" %}">Camera Feed</a>
                         </li>
+
+                        <li {% if section == "Upload" %}class="selected"{% endif %}>
+                            <a href="{% url "upload" %}"> Details Upload </a>
+                        </li>
+
                         <li {% if section == "edit" %}class="selected"{% endif %}>
                             <a href="{% url "edit" %}">My Settings</a>
                         </li>

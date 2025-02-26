@@ -16,4 +16,5 @@ urlpatterns = [
     path('edit/', views.edit, name='edit'),
     path('video_feed/', views.video_feed, name='video_feed'),
     path('camera/', views.camera, name='camera'),
+    path('upload/', views.upload_person, name='upload'),
 ]
