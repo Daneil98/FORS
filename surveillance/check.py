@@ -1,2 +1,2 @@
 import os
-print(os.path.exists('surveillance/Mesi.webp'))
+print(os.path.exists('media/screenshots'))

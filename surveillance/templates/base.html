@@ -17,19 +17,23 @@
     <body>
         
         <div id="header">
-            <a href="{% url "index" %}"><span class="logo">VEIDT SECURITIES</span></a>
+            <a href="{% url "index" %}"><span class="logo">ORION'S SHIELD</span></a>
                 {% if request.user.is_authenticated %}
                     <ul class="menu">
                         <li {% if section == "dashboard" %}class="selected"{% endif %}>
                             <a href="{% url "dashboard" %}">My dashboard</a>
                         </li>
 
-                        <li {% if section == "camera" %}class="selected"{% endif %}>
-                            <a href="{% url "camera" %}">Camera Feed</a>
+                        <li {% if section == "cameras" %}class="selected"{% endif %}>
+                            <a href="{% url "cameras" %}">Camera Feeds</a>
                         </li>
 
                         <li {% if section == "Upload" %}class="selected"{% endif %}>
                             <a href="{% url "upload" %}"> Details Upload </a>
+                        </li>
+
+                        <li {% if section == "Notifications" %}class="selected"{% endif %}>
+                            <a href="{% url "Notifications" %}"> Notifications <span class="badge">{{ count }}</span>  </a>
                         </li>
 
                         <li {% if section == "edit" %}class="selected"{% endif %}>

@@ -15,6 +15,12 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('edit/', views.edit, name='edit'),
     path('video_feed/', views.video_feed, name='video_feed'),
+    path('video_feed2/', views.video_feed2, name='video_feed2'),
+    path('cameras/', views.cameras, name='cameras'),
     path('camera/', views.camera, name='camera'),
+    path('camera2/', views.camera2, name='camera2'),
     path('upload/', views.upload_person, name='upload'),
+    path('Notifications/', views.Notifications, name='Notifications'),
+    path('Logs/', views.logs, name='Logs'),
+    path('view-image/', views.view_image, name='view_image'),
 ]

@@ -1,14 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http.response import StreamingHttpResponse
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, FileResponse, Http404, JsonResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import Profile
+from django.utils import timezone
+from datetime import timedelta
+from django.views.decorators.csrf import csrf_exempt
+import logging
 
+
+
+logger = logging.getLogger(__name__)
 
 from .camera import gen_frames  # Import the frame generator function
+from .camera1 import gen_frames1
 
 
 
@@ -18,8 +26,21 @@ from .camera import gen_frames  # Import the frame generator function
 def index(request):
     return render(request, 'index.html')
 
+@login_required
 def base(request):
-    return render(request, 'base.html')    
+    logs = Logs.objects.filter(
+        Date__gte=timezone.now() - timedelta(hours=24)
+    ).order_by('-date')  # Newest first
+    
+    # Count of new notifications (unread)
+    count = logs.filter(is_read=False).count()
+    
+    context = {
+        'logs': logs,
+        'count': count,  # This makes {{ count }} available
+        'section': 'Notifications',
+    }
+    return render(request, 'base.html', {'context': context})    
      
 
 #ACCOUNT VIEWS
@@ -85,17 +106,32 @@ def edit(request):
 def dashboard(request):
     return render(request, 'surveillance/dashboard.html')
 
+@login_required
+def cameras(request):
+    return render(request, 'surveillance/cameras.html')
 
 @login_required
 def camera(request):
     return render(request, 'surveillance/camera.html')
 
 
+@login_required
+def camera2(request):
+    return render(request, 'surveillance/camera2.html')
+
+@login_required
 def video_feed(request):
     # Return the video feed as an HTTP response
-    return StreamingHttpResponse(gen_frames(), content_type='multipart/x-mixed-replace; boundary=frame')
+    return StreamingHttpResponse(gen_frames(request), content_type='multipart/x-mixed-replace; boundary=frame')
+
+@login_required
+def video_feed2(request):
+    # Return the video feed as an HTTP response
+    return StreamingHttpResponse(gen_frames1(), content_type='multipart/x-mixed-replace; boundary=frame')
 
 
+
+@login_required
 def upload_person(request):
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
@@ -112,3 +148,55 @@ def upload_person(request):
 
         
     return render(request, 'surveillance/upload.html', {'form': form,})
+
+
+@login_required
+def Notifications(request):
+    # Get logs from the last 24 hours (or whatever timeframe you prefer)
+    logs = Logs.objects.filter(
+        date__gte=timezone.now() - timedelta(hours=24)
+    ).order_by('-date')  # Newest first
+    
+    # Count of new notifications (unread)
+    new_notifications_count = logs.filter(is_read=False).count()
+    
+    context = {
+        'logs': logs,
+        'new_notifications_count': new_notifications_count,
+        'current_time': timezone.now(),
+    }
+    
+    return render(request, 'surveillance/notification.html', context)
+
+
+@login_required
+def logs(request):
+    # Get logs from the last 24 hours (or whatever timeframe you prefer)
+    logs = Logs.objects.all() # Newest first
+    
+    # Count of new notifications (unread)
+    new_notifications_count = logs.filter(is_read=False).count()
+    
+    context = {
+        'logs': logs,
+        'new_notifications_count': new_notifications_count,
+        'current_time': timezone.now(),
+    }
+    
+    return render(request, 'surveillance/notification.html', context)
+
+
+@login_required
+def view_image(request):
+    if request.method == 'GET' and 'photo_id' in request.GET:
+        log_entry = get_object_or_404(Logs, id=request.GET.get('photo_id'))
+        
+        if log_entry.screenshot:
+            # Construct absolute path
+            image_path = os.path.join(settings.MEDIA_ROOT, str(log_entry.screenshot))
+            
+            if os.path.exists(image_path):
+                return FileResponse(open(image_path, 'rb'), content_type='image/jpeg')
+            raise Http404("Image file not found")
+        raise Http404("No image available")
+    return HttpResponse("Invalid request", status=400)

@@ -1,13 +1,16 @@
 import cv2
 import numpy as np
 import imutils
-from imutils import paths
 import face_recognition
-import os, time
-from django.http import JsonResponse
+import time
+
+from numba import jit, cuda
+from .models import Target, Logs
 
 
-from .models import *
+URL = 'http://192.168.151.110:8080/video'
+
+
 
 
 active_captures = {}
@@ -32,31 +35,35 @@ def load_known_faces():
 
 known_face_encodings, known_face_names = load_known_faces()
 
-    
 gun_cascade = cv2.CascadeClassifier('gun_cascade.xml')
 firstFrame = None
 gun_exist = False
-
-
-def gen_frames(request):
-    stream_id = request.GET.get('stream_id', str())
-    cap = cv2.VideoCapture(0)    
-    active_captures[stream_id] = cap 
     
-    if not cap.isOpened():
-        print("Error: Camera not accessible")
-        return
 
-    while True:
-        success, frame = cap.read()
+
+def gen_frames1():
+
+    
+    while True:  # Outer loop for reconnection
+        # Initialize fresh resources each reconnect
+        cap = None
+
+    
+        # Initialize camera
+        cap = cv2.VideoCapture(URL)
+
+
         
-        if not success:
-            print("Failed to read frame")
+        ret, frame = cap.read()
+        if not ret:
+            print("Frame read failed - reconnecting")
+            time.sleep(0.1)
             break
         
+        if not cap.isOpened():
+            raise RuntimeError("Camera initialization failed")
         
-        # Resize frame for consistent processing
-        frame = imutils.resize(frame, width=500)
+        
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         gun = gun_cascade.detectMultiScale(gray, 1.3, 20, minSize=(100, 100))
@@ -64,6 +71,7 @@ def gen_frames(request):
         if len(gun) > 0:
             gun_exist = True
         
+        # Efficient face processing
         face_locations = face_recognition.face_locations(frame, number_of_times_to_upsample=0, model="hog")
         face_encodings = face_recognition.face_encodings(frame, face_locations)
         
@@ -73,12 +81,7 @@ def gen_frames(request):
             #Check if there are any known faces
             matches = face_recognition.compare_faces(known_face_encodings, face_encoding, tolerance=0.6)
             name = "Unknown"
-            
-            """
-            if True in matches:
-                first_match_index = matches.index(True)
-                name = known_face_names[first_match_index]            
-            """
+
                 
             face_distances= face_recognition.face_distance(known_face_encodings, face_encoding)
             best_match_index = np.argmin (face_distances)
@@ -86,7 +89,7 @@ def gen_frames(request):
             if matches[best_match_index]:
                 name = known_face_names[best_match_index]
                 
-            
+        # Draw results
         for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):   
             #Draw a box around the face and label with the name
             cv2.rectangle(frame, (left, top), (right, bottom), (255, 0, 0), 2)
@@ -98,30 +101,20 @@ def gen_frames(request):
             #Draw a box around the gun and label with a statement
             frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
             cv2.putText(frame,  "Gun detected",  (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2) 
-            Logs.create_if_not_recent(person='', weapon='Gun', camera=1, frame=frame)
+            Logs.create_if_not_recent(person='', weapon='Gun', camera=2, frame=frame)
         
+            
             
         # Encode frame for streaming
         _, buffer = cv2.imencode('.jpg', frame)
         frame = buffer.tobytes()
         yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-        # Exit on 'q' key
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
 
-    cap.release()
-    cv2.destroyAllWindows()
+        if cap and cap.isOpened():
+            cap.release()
 
 
 
 
 
-        
-
-
-"""
-# Sequential pipeline (optimized)
-if YOLOv5.detect(frame) == "person":  # First detect humans
-    face_results = face_recognition.process(frame)  # Then analyze faces
-"""

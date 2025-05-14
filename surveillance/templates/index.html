@@ -8,8 +8,9 @@
     <head>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}{% endblock %}</title>
+        <title>{% block title %} ORION'S SHIELD {% endblock %}</title>
         <link href="{% static "css/base.css" %}" rel="stylesheet">
+        <link rel="icon" href="{% static 'favicon.ico' %}">
         
     </head>
 
@@ -17,16 +18,17 @@
     <body>
 
         
-        <h1>VEIDT SECURITIES</h1>
+        <h1>ORION'S SHIELD</h1>
         
         <nav class= "navbar navar-default navbar-static-top">
             <div class="container">
                 <div class="col-sm-2">
                     {% block sidebar %}
                         <ul class="nav navar-nav">
-                            <li><a class="navbar-link" href="surveillance/login">Login</a></li>
+                            <li><a class="navbar-link" href = "{% url "login" %}"> Login</a></li>
                             <br>
-                            <li><a class="navbar-link" href="surveillance/register">Register</a></li>
+                            
+                            <li><a class="navbar-link" href = "{% url "register" %}">Register</a></li>
                         </ul>
                     {% endblock %}
                 </div>    

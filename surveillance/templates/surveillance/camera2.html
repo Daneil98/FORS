@@ -1,0 +1,16 @@
+
+{% extends "base.html" %}
+
+{% block title %} Camera Feed{% endblock %}
+
+{% block content %}
+
+&nbsp;
+    <h1>Real-Time Camera Feed </h1>
+    <p><a href="{% url 'camera' %}"><b> Previous camera </b></a><p>  
+    
+    <h3> Camera 2 </h3>
+    <img src="{% url 'video_feed2' %}" width="640" height="480" />    
+    
+{% endblock %}
+

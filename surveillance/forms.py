@@ -31,4 +31,4 @@ class UserEditForm(forms.ModelForm):
 class UploadForm(forms.ModelForm):
     class Meta:
         model = Target
-        fields = ('name', 'photo1', 'photo2', 'photo3')
+        fields = ('name', 'photo1', 'photo2')

@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %} All Notifications {% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Modal div -->
+<div id="imageModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:1000;text-align:center;">
+    <img id="modalImage" style="max-height:90%;max-width:90%;margin-top:5%;">
+    <button onclick="document.getElementById('imageModal').style.display='none'" 
+            style="position:absolute;top:20px;right:20px;background:#fff;border:none;padding:5px 10px;cursor:pointer;">
+        Close
+    </button>
+</div>
+
+<!-- Modified form -->
+<td>
+    {% if log.screenshot %}
+    <button onclick="showImage('{{ log.screenshot.url }}')" class="image-view-button">
+        <img src="{{ log.screenshot.url }}" alt="Detection Image" width="100">
+    </button>
+    {% else %}
+    <span class="no-image">No Image</span>
+    {% endif %}
+</td>
+
+<script>
+function showImage(url) {
+    document.getElementById('modalImage').src = url;
+    document.getElementById('imageModal').style.display = 'block';
+}
+</script>
+
+
+{% block content %}
+    <h2>Security Notifications 
+        <span class="badge" id="notification-counter">{{ new_notifications_count }}</span>
+    </h2>
+
+    <div class="notifications-container">
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('persons')">Persons Detected</button>
+            <button class="tab-button" onclick="showTab('weapons')">Weapons Detected</button>
+        </div>
+
+        <div id="persons" class="tab-content active">
+            <table class="table text-center">
+                <tr>
+                    <td><h4><b> PERSON OF INTEREST </b></h4></td> 
+                    <td><h4><b> DATE </b></h4></td> 
+                    <td><h4><b> CAMERA </b></h4></td>
+                    <td><h4><b> IMAGE </b></h4></td>  
+                </tr>
+                
+                {% for log in logs %}
+                    {% if log.person %}
+                    <tr class="notification {% if not log.is_read %}unread{% endif %}">
+                        <td><strong>{{ log.person }}</strong></td>
+                        <td>{{ log.date }}</td>
+                        <td><span class="text-muted">Camera {{ log.camera }}</span></td>
+
+                        <td>
+                            {% if log.screenshot %}
+                                <img src="{{ log.screenshot.url }}" alt="Detection Image" width="100">
+                                <form method="get" action="{% url 'view_image' %}" style="display:inline;">
+                                    <input type="hidden" name="photo_id" value="{{ log.id }}">
+                                    <button type="submit" class="btn btn-sm btn-info">View Full</button>
+                                </form>
+                            {% else %}
+                                <span class="text-muted">No image</span>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                    {% endif %}
+                {% empty %}
+                    <tr><td colspan="4">No detected persons</td></tr>
+               {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="weapons" class="tab-content">
+            <table class="table text-center">
+                <tr> 
+                        <td><h4><b> WEAPON </b></h4></td> 
+                        <td><h4><b> DATE </b></h4></td> 
+                        <td><h4><b> CAMERA </b></h4></td>
+                        <td><h4><b> IMAGE </b></h4></td> 
+                </tr> 
+            
+                {% for log in logs %}
+                    {% if log.weapon %}
+                    <tr class="notification {% if not log.is_read %}unread{% endif %}">
+                        <td><span class="text-danger"><strong>{{ log.weapon }}</strong></span></td>
+                        <td>{{ log.date }}</td>
+                        <td><span class="text-muted">Camera {{ log.camera }}</span></td>
+
+                        <td>
+                            {% if log.screenshot %}
+                                <img src="{{ log.screenshot.url }}" alt="Detection Image" width="100">
+                                <form method="get" action="{% url 'view_image' %}" style="display:inline;">
+                                    <input type="hidden" name="photo_id" value="{{ log.id }}">
+                                    <button type="submit" class="btn btn-sm btn-info">View Full</button>
+                                </form>
+                            {% else %}
+                                <span class="text-muted">No image</span>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                    {% endif %}
+                {% empty %}
+                    <tr><td colspan="4">No weapon detected</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+
+    <style>
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab-button {
+            font-size: 2rem;
+            background: none;
+            border: none;
+            padding: 12px 30px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            background-color: #f0f0f0;
+            border-bottom: 3px solid transparent;
+            transition: 0.3s;
+        }
+        
+        .tab-button.active {
+            color: red;
+            border-bottom: 3px solid red;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+
+
+        .image-view-button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .image-view-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .image-view-button img {
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+        }
+        
+        .image-view-button span {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            color: #666;
+        }
+
+    </style>
+        
+    <script>
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-button');
+        
+            tabs.forEach(tab => tab.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+        
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+        
+
+
+{% endblock %}
