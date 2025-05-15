@@ -6,6 +6,8 @@ This webapp that takes live video feed from a connected camera and runs facial r
 
 API Endpoints will also created to allow for CRUD operations.
 
+- NOTE: Please ensure CMake and C++ SDK from Visual Studio is installed on yor local machine
+
 
 
 ## Run Locally
