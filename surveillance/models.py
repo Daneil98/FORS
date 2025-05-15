@@ -5,8 +5,14 @@ from datetime import timedelta
 import time, os
 import cv2
 from django.core.files import File
+from twilio.rest import Client
+
 
 # Create your models here.
+
+account_sid = ''
+auth_token = ''
+client = Client(account_sid, auth_token)
 
 
 #USER ACCOUNT MODEL
@@ -73,5 +79,13 @@ class Logs(models.Model):
                     log.screenshot = screenshot_path
                 
             log.save()
+
+            message = client.messages.create(
+                body = f"{person} or {weapon} was detected in camera {camera}",
+                from_='+13365698667',
+                to='+2348165941743'
+            )
+
+            print(message.sid)
             return log
         return None
