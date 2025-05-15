@@ -75,8 +75,8 @@ To run this project, you will need to add the following environment variables to
   
   auth_token = ''
 
-CELERY_BROKER_URL = ''
+- CELERY_BROKER_URL = ''
 
-CELERY_ACCEPT_CONTENT = ['json']
+- CELERY_ACCEPT_CONTENT = ['json']
 
-CELERY_TASK_SERIALIZER = 'json'
+- CELERY_TASK_SERIALIZER = 'json'
