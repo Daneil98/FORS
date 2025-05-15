@@ -2,7 +2,7 @@
   ORION'S SHIELD
 - A Facial Recognition and weapon detection web-app
 
-This webapp that takes live video feed from a connected camera and runs facial recognition o the images of people uploaded into the system and weapon detection with a gun_cascade.xml file gotten from GeeksforGeeks.com pending the completion of a custom-trained YOLOv5 model.
+This webapp that takes live video feed from a connected camera and runs facial recognition with the poplar python 'face_recongition' model on the images of people uploaded into the system and weapon detection with a gun_cascade.xml file gotten from GeeksforGeeks.com pending the completion of a custom-trained YOLOv5 model.
 
 API Endpoints will also created to allow for CRUD operations.
 
@@ -62,15 +62,21 @@ API Endpoints will also created to allow for CRUD operations.
 
 To run this project, you will need to add the following environment variables to your .env file
 
-- Camera1.py 
-  URL = ''
+- Camera1.py
+  
+  URL = '' (For streaming over the wifi)
 
 - Models.py___Twilio Config
-  to = ''
-  from = ''
+  to = '' (phone number to receive SMS)
+  
+  from_= '' (Twilio Phone number)
+  
   account_sid = ''
+  
   auth_token = ''
 
 CELERY_BROKER_URL = ''
+
 CELERY_ACCEPT_CONTENT = ['json']
+
 CELERY_TASK_SERIALIZER = 'json'
