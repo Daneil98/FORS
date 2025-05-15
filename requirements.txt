@@ -1,6 +1,7 @@
-open-cv
-face_Recognition
+opencv
+face_recognition
 imutils
 numpy
-django
-python
+Django==4.2
+python==3.9.13
+twilio
