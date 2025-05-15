@@ -1,30 +1,49 @@
 
-FACIAL AND OBJECT DETECTION WEB-APP
+  ORION'S SHIELD
+- A Facial Recognition and weapon detection web-app
 
-A webapp that takes camera feed and runs facial detection and weapon detection. API Endpoints will also created to allow for CRUD operations.
+This webapp that takes live video feed from a connected camera and runs facial recognition o the images of people uploaded into the system and weapon detection with a gun_cascade.xml file gotten from GeeksforGeeks.com pending the completion of a custom-trained YOLOv5 model.
+
+API Endpoints will also created to allow for CRUD operations.
+
+
 
 ## Run Locally
 
-Clone the project
+- Clone the project
 
 ```bash
   git clone https://github.com/Daneil98/FORS
 ```
 
-Go to the project directory
+- Go to the project directory
 
 ```bash
-  cd FACIAL_OBJECT_RECOGNITION_SYSTEM
+  cd FORS
 ```
 
-Install dependencies
+- Install dependencies
 
 ```bash
   pip install -r requirements.txt
 
 ```
 
-Start the server
+- Prepare Migrations
+
+```bash
+  python manage.py makemigrations
+
+```
+
+- Enact Migrations
+
+```bash
+  python manage.py migrate
+
+```
+
+- Start the server
 
 ```bash
   python manage.py runserver
@@ -34,8 +53,10 @@ Start the server
 ## Features
 
 - User Authentication: Sign-up, login, and logout functionality with secure password storage.
-- Face Detection: Automatic detection of faces in connected camera feed.
+- Face Recognition: Automatic recognition of faces uploaded into the system that present connected camera feed.
 - Gun Detection: Automatic detection of guns in connected camera feed.
+- Notification Log: Automatic logging of recognized people and weapons into the database with timestamps and the camera feed with a 30 min recency time.
+- SMS Notifications: Automatic Generation and sending of SMS texts to preconfigured party about the most recent Notification Log entry.
 
 ## Environment Variables(NOT NECESSARY FOR NOW)
 
