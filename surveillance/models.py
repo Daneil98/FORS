@@ -82,8 +82,8 @@ class Logs(models.Model):
 
             message = client.messages.create(
                 body = f"{person} or {weapon} was detected in camera {camera}",
-                from_='+13365698667',
-                to='+2348165941743'
+                from_='',
+                to=''
             )
 
             print(message.sid)
