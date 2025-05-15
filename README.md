@@ -58,9 +58,18 @@ API Endpoints will also created to allow for CRUD operations.
 - Notification Log: Automatic logging of recognized people and weapons into the database with timestamps and the camera feed with a 30 min recency time.
 - SMS Notifications: Automatic Generation and sending of SMS texts to preconfigured party about the most recent Notification Log entry.
 
-## Environment Variables(NOT NECESSARY FOR NOW)
+## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
+
+- Camera1.py 
+  URL = ''
+
+- Models.py___Twilio Config
+  to = ''
+  from = ''
+  account_sid = ''
+  auth_token = ''
 
 CELERY_BROKER_URL = ''
 CELERY_ACCEPT_CONTENT = ['json']
