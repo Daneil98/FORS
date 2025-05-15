@@ -3,17 +3,10 @@ import numpy as np
 import imutils
 import face_recognition
 import time
-
-from numba import jit, cuda
 from .models import Target, Logs
 
 
-URL = 'http://192.168.151.110:8080/video'
-
-
-
-
-active_captures = {}
+URL = ''
 
 
 # Pre-load known faces
