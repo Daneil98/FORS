@@ -1,0 +1,437 @@
+@import url(//fonts.googleapis.com/css?family=Muli);
+body {
+    margin: 0;
+    padding: 0;
+    font-family: helvetica, sans-serif;
+    background-color: #000;
+    /* Dark grey background */
+    color: white;
+    /* White text for entire body */
+}
+
+
+/* Sidebar navigation */
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    /* Start closed */
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    /* Dark grey */
+    overflow-x: hidden;
+    transition: 0.5s;
+    /* Smooth transition */
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 17px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    background-color: #444;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.open-nav {
+    font-size: 30px;
+    cursor: pointer;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    z-index: 2;
+    color: white;
+}
+
+.navbar-link.btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin: 0 15px;
+    min-width: 120px;
+    text-align: center;
+}
+
+
+/* Main content */
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+    margin-left: 0;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 14px;
+    }
+}
+
+p {
+    line-height: 1.8;
+}
+
+a {
+    color: #656665;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #656665;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Muli', sans-serif;
+    font-weight: normal;
+    color: white;
+}
+
+h1 {
+    border-bottom: 1px solid #555;
+    padding: 0 0 10px 0;
+    margin: 10px 0 20px 0;
+}
+
+h2 {
+    margin: 30px 0 20px;
+}
+
+ol {
+    line-height: 1.5;
+}
+
+#header {
+    padding: 10px 100px;
+    font-size: 14px;
+    background: #080908;
+    color: #fff;
+    border-bottom: 4px solid #040404;
+    overflow: auto;
+}
+
+#header .logo {
+    font-family: 'Muli', sans-serif;
+    float: left;
+    color: #f3f7cc;
+    font-size: 20px;
+    margin-right: 10%;
+}
+
+#header ul.menu {
+    list-style: none;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+#header ul.menu li {
+    float: left;
+    padding: 4px 10px;
+}
+
+#header ul.menu li.selected a,
+#header ul.menu li.selected a:hover {
+    color: #feffff;
+    font-weight: bold;
+}
+
+#header a {
+    color: #f3f7cc;
+}
+
+#header a:hover {
+    color: #fff;
+}
+
+#header .user {
+    float: right;
+    padding-top: 4px;
+}
+
+#content {
+    padding: 30px 100px;
+}
+
+
+/* forms */
+
+form {
+    overflow: auto;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+form p {
+    width: 100%;
+    overflow: auto;
+}
+
+label {
+    float: left;
+    clear: both;
+    color: rgb(240, 238, 238);
+    margin-bottom: 4px;
+}
+
+input,
+textarea {
+    clear: both;
+    float: left;
+    margin: 0 0 10px;
+    background: #2e2e2e !important;
+    /* Grey form fields */
+    border: 0;
+    padding: 6px 10px;
+    font-size: 14px;
+    color: white !important;
+    /* White text in form fields */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type=submit],
+a.button {
+    font-weight: bold;
+    background: #e9ebea;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+}
+
+.errorlist {
+    color: #ff6b6b;
+    float: left;
+    clear: both;
+    padding-left: 10px;
+}
+
+.helptext {
+    margin: 0 0 20px 0;
+    color: #aaa;
+    clear: both;
+    float: left;
+    font-size: 13px;
+}
+
+
+/* messages */
+
+ul.messages {
+    margin: 10px auto;
+    padding: 0;
+    list-style-type: none;
+    max-width: 800px;
+}
+
+ul.messages li.success,
+ul.messages li.warning,
+ul.messages li.error,
+ul.messages li.info {
+    margin: 0;
+    padding: 14px 20px;
+    list-style: none;
+    color: #fff;
+}
+
+ul.messages li.success {
+    background: #4e4f4e;
+}
+
+ul.messages li.success a {
+    color: #545654;
+}
+
+ul.messages li.error {
+    background: #a30029;
+    color: #e9828e;
+}
+
+ul.messages li.error a {
+    color: #e9828e;
+}
+
+ul.messages li.info {
+    background: #555;
+    color: white;
+}
+
+ul.messages li.info a {
+    color: #1586de;
+}
+
+ul.messages li.warning {
+    background: #de9404;
+}
+
+ul.messages li.warning a {
+    color: #f49000;
+}
+
+ul.messages li a.close {
+    margin: 0;
+    float: right;
+    opacity: 1;
+    border: 0;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+.login-form {
+    float: none;
+    margin: 0 auto;
+    padding: 20px;
+    background: #444;
+    border-radius: 5px;
+}
+
+
+/* images */
+
+.image-preview,
+.image-detail {
+    max-width: 300px;
+    float: left;
+    margin: 0 20px 20px 0;
+}
+
+.image-detail {
+    margin-top: 20px;
+}
+
+.image-info div {
+    padding: 20px 0;
+    overflow: auto;
+}
+
+.count {
+    color: #aaa;
+    border: 3px solid #bbb;
+    border-radius: 26px;
+    padding: 10px 20px;
+    margin: 20px 10px 0;
+}
+
+a.like,
+a.follow {
+    float: right;
+    margin-top: -8px;
+}
+
+#image-list {
+    overflow: auto;
+}
+
+#image-list .image {
+    float: left;
+    width: 220px;
+    height: 300px;
+    margin: 0 10px 10px 10px;
+    border-top: 8px solid #101211;
+    background: #eee;
+}
+
+#image-list img {
+    width: 220px;
+    height: 220px;
+}
+
+#image-list .info {
+    padding: 10px;
+}
+
+#image-list .info a {
+    color: #333;
+}
+
+.image-likes div {
+    float: left;
+    width: auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.image-likes img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+
+/* users */
+
+#people-list img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+#people-list .user {
+    width: 180px;
+    float: left;
+    overflow: auto;
+    padding: 10px;
+}
+
+#people-list .info {
+    text-align: center;
+}
+
+img.user-detail {
+    border-radius: 50%;
+    float: left;
+}
+
+.profile-info {
+    float: left;
+    overflow: auto;
+    margin-right: 20px;
+}
+
+.image-container {
+    margin-top: 40px;
+}
+
+
+/* actions */
+
+.action {
+    clear: both;
+    overflow: auto;
+}
+
+.action .images {
+    float: left;
+    margin: 0 10px 10px 0;
+}
+
+.action .date {
+    font-style: italic;
+    color: #ccc;
+}

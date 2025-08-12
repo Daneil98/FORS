@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %} Notifications {% endblock %}
+
+{% block content %}
+    <h1>Real-Time Notifications</h1>
+
+    <table class="table text-center">
+        <tr><td><b> Person of Interest</b></td> 
+            <td><b> Weapon </b></td> 
+            <td><b> Date </b></td> 
+            <td><b> Camera </b></td> 
+        </tr>
+
+        {% if context.logs %}   
+            {% for log in logs %}
+                <tr><td><b> {{ log.person }} </b></td> 
+                    <td><b> {{ log.weapon }} </b></td>
+                    <td><b> {{ log.camera }} </b></td> 
+                    <td><b> {{ log.Date }} </b></td> 
+                </tr>
+            {% endfor %}
+        {% else %}
+            <p>No Notifications available.</p>
+        {% endif %}
+        
+    </table>
+
+
+{% endblock %}

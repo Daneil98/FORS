@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %} ORION'S SHIELD {% endblock %}</title>
+        <link href="{% static "css/base.css" %}" rel="stylesheet">
+        <link rel="icon" href="{% static 'favicon.ico' %}">
+        
+    </head>
+
+
+    <body>
+
+
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <img src='{% static 'Orion shield.png' %}' width="1100" height="700" alt="Orion">
+        </div>
+        
+
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container" style="display: flex; justify-content: center; align-items: center;">
+                <div class="col-sm-12" style="display: flex; gap: 200px; justify-content: center;">
+                    {% block sidebar %}
+                       <a class="navbar-link btn btn-primary" href="{% url 'login' %}" 
+                       style="padding: 10px 20px; font-size: 18px; color: grey;">LOGIN</a>
+                        
+                       <a class="navbar-link btn btn-primary" href="{% url 'register' %}" 
+                        style="padding: 10px 20px; font-size: 18px; color: grey;">REGISTER</a>
+                    {% endblock %}
+                </div>    
+            </div>
+        </nav>
+    </body>
+</html>
+
