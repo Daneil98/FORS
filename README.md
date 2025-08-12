@@ -89,21 +89,14 @@ To run this project, you will need to add the following environment variables to
   
   URL = '' (For streaming over the wifi)
 
-- Models.py___Twilio Config
+- Models.py___Twilio Config #ADD THEM TO YOUR .env file
 
-  to = '' (phone number to receive SMS)
-  
-  from_= '' (Twilio Phone number)
-  
-  account_sid = ''
-  
-  auth_token = ''
+account_sid = ''
+auth_token = ''
+sending_number = ''
+receiving_number = ''
 
-- CELERY_BROKER_URL = ''
 
-- CELERY_ACCEPT_CONTENT = ['json']
-
-- CELERY_TASK_SERIALIZER = 'json'
 
 
 
