@@ -4,6 +4,10 @@
 
 This web-app allows authenticated and authorized users to access a system that recognizes faces from uploaded images and detect weapons (knives, guns, drones) in real time via connected camera feeds. It consists of the integration of a facial recognition model (InsightFace) and quantized weapon detection model (Custom trained YOLOV5n model) into a webapp. This webapp also allows for real time SMS notifications and automatic logging for recognized faces and detected weapons with screenshots for future review.
 
+The facial recognition & objection detection pipeline flowchart is https://github.com/Daneil98/FORS/blob/master/Facial%20recognition%20and%20weapon%20detection%20pipeline.png
+
+The Django model architecture diagram is https://github.com/Daneil98/FORS/blob/master/Django%20Model%20Architecture.png
+
 API Endpoints will also created to allow for CRUD operations.
 The weapon detection model was trained to detect the following classes for more granular data, effective response and threat contextual analysis:
 
@@ -28,7 +32,7 @@ names:
 - NOTE: 
 1. Please ensure CMake and C++ SDK from Visual Studio is installed on yor local machine.
 2. The InsightFace model runs on GPU, so please make sure you have a CUDA enabled GPU on your local machine.
-3. Make sure you clone the yolov5 repository since you will be running a custom model on your local machine.
+3. Make sure you clone the yolov5 repository and place it in the project directory since you will be running a custom model on your local machine.
 
 
 ## Run Locally
