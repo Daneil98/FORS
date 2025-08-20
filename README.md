@@ -95,10 +95,10 @@ To run this project, you will need to add the following environment variables to
 
 - Models.py___Twilio Config #ADD THEM TO YOUR .env file
 
-account_sid = ''
-auth_token = ''
-sending_number = ''
-receiving_number = ''
+  account_sid = ''
+  auth_token = ''
+  sending_number = ''
+  receiving_number = ''
 
 
 
