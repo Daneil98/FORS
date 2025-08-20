@@ -80,16 +80,16 @@ names:
 ## Features
 
 - User Authentication: Sign-up, login, and logout functionality with secure password storage.
-- Face Recognition: Automatic recognition of faces uploaded into the system that present connected camera feed.
-- Gun Detection: Automatic detection of guns in connected camera feed.
-- Notification Log: Automatic logging of recognized people and weapons into the database with timestamps and the camera feed with a 30 min recency time.
+- Face Recognition: Automatic recognition of faces uploaded into the system that are present/seen in the connected camera feed.
+- Weapon Detection: Automatic detection of weapons in connected camera feed.
+- Notification Logs: Automatic logging of recognized people and weapons into the database with timestamps and the camera feed with a 30 min recency time for faces and 2 mins for weapons.
 - SMS Notifications: Automatic Generation and sending of SMS texts to preconfigured party about the most recent Notification Log entry.
 
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
-- Camera1.py
+- Camera3.py
   
   URL = '' (For streaming over the wifi)
 
