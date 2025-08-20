@@ -6,7 +6,7 @@ This web-app allows authenticated and authorized users to access a system that r
 
 The facial recognition & objection detection pipeline flowchart is at https://github.com/Daneil98/FORS/blob/master/Facial%20recognition%20and%20weapon%20detection%20pipeline.png
 
-The Django System aAchitecture diagram is at https://github.com/Daneil98/FORS/blob/master/Django%20System%20Architecture.png
+The Django System Achitecture diagram is at https://github.com/Daneil98/FORS/blob/master/Django%20System%20Architecture.png
 
 
 The weapon detection model was trained to detect the following classes for more granular data, effective response and threat contextual analysis:
@@ -43,18 +43,50 @@ names:
   git clone https://github.com/Daneil98/FORS
 ```
 
+
 - Go to the project directory
 
 ```bash
   cd FORS
 ```
 
-- Install dependencies
+
+- Install FORS dependencies
 
 ```bash
   pip install -r requirements.txt
 
 ```
+
+
+- Clone the yolov5 project repo
+
+```bash
+  git clone https://github.com/ultralytics/yolov5
+```
+
+
+- Go to the yolov5 project directory
+
+```bash
+  cd yolov5
+```
+
+
+- Install yolov5 dependencies
+
+```bash
+  pip install -r requirements.txt
+
+```
+
+
+- Go back to project directory
+
+```bash
+  cd ..
+```
+
 
 - Prepare Migrations
 
@@ -63,12 +95,14 @@ names:
 
 ```
 
+
 - Enact Migrations
 
 ```bash
   python manage.py migrate
 
 ```
+
 
 - Start the server
 
@@ -89,7 +123,7 @@ names:
 
 To run this project, you will need to add the following environment variables to your .env file
 
-- Camera3.py
+- For Camera3.py #ADD THEM TO YOUR .env file
   
   URL = '' (For streaming over the wifi)
 
