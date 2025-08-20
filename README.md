@@ -8,7 +8,7 @@ The facial recognition & objection detection pipeline flowchart is https://githu
 
 The Django model architecture diagram is https://github.com/Daneil98/FORS/blob/master/Django%20Model%20Architecture.png
 
-API Endpoints will also created to allow for CRUD operations.
+
 The weapon detection model was trained to detect the following classes for more granular data, effective response and threat contextual analysis:
 
 names:
