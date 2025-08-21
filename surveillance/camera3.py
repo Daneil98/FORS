@@ -1,4 +1,4 @@
-import cv2, pathlib, torch
+import cv2, pathlib, torch, os
 from .models import Target, Logs 
 import numpy as np
 from numpy.linalg import norm
@@ -8,7 +8,7 @@ from insightface.app import FaceAnalysis
 
 rcond = None
 
-URL = 'http://192.168.0.136:8080/video'
+URL = os.environ.get("URL")
 
 device = torch.device('cpu')
 
@@ -180,4 +180,5 @@ def gen_frames3():
         
 
     cap.release()
+
     cv2.destroyAllWindows()
