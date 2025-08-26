@@ -4,7 +4,7 @@
 
 This web-app allows authenticated and authorized users to access a system that recognizes faces from uploaded images and detect weapons (knives, guns, drones) in real time via connected camera feeds. It consists of the integration of a facial recognition model (InsightFace) and quantized weapon detection model (Custom trained YOLOV5n model) into a webapp. This webapp also allows for real time SMS notifications and automatic logging for recognized faces and detected weapons with screenshots for future review.
 
-The facial recognition & objection detection pipeline flowchart is at https://github.com/Daneil98/FORS/blob/master/Facial%20recognition%20and%20weapon%20detection%20pipeline.png
+The facial recognition & objection detection pipeline flowchart is at (https://github.com/Daneil98/FORS/blob/master/Facial%20recognition%20and%20weapon%20detection%20algorithmic%20pipeline.png)
 
 The Django System Achitecture diagram is at https://github.com/Daneil98/FORS/blob/master/Django%20System%20Architecture.png
 
