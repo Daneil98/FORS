@@ -23,6 +23,9 @@ numpy==1.26.4
 onnxruntime-gpu-1.19.2
 torch==2.3.0+cu118 
 torchvision==0.18.0+cu118 
-torchaudio --index-url 
+torchaudio #--index-url 
 channels
 daphne
+matplotlib
+pandas
+plotly
