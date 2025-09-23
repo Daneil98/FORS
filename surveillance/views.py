@@ -10,20 +10,18 @@ from django.utils import timezone
 from datetime import timedelta
 from django.views.decorators.csrf import csrf_exempt
 import logging
-
-
+from .camera import gen_frames  # Import the frame generator function
+from .camera3 import gen_frames3 #create_face_embedding
+from .charts import *
 
 logger = logging.getLogger(__name__)
 
-from .camera import gen_frames  # Import the frame generator function
-from .camera3 import gen_frames3
 
 #Basic list of valid court_id numbers
-court_ids = [00000, 00001, 00002, 00003]    #Meant to be 3rd party integrated API to court records, but a simpler example for testing will suffice
+court_ids = [0, 1, 2, 3]    #Meant to be integrated 3rd party API to court records, but a simpler example for testing will suffice
 
 
 # Create your views here.
-
 
 def index(request):
     return render(request, 'index.html')
@@ -109,6 +107,15 @@ def dashboard(request):
     return render(request, 'surveillance/dashboard.html')
 
 @login_required
+def threat_center(request):
+    #ai_insights = insights()
+    interactive_chart = plotly_Chart()
+    chart = weapon_stats()
+    histogram = weapon_histogram()
+    return render(request, 'surveillance/tca.html', {"chart": chart, 'histogram': histogram,
+                                                     'pchart': plotly_Chart})
+
+@login_required
 def cameras(request):
     return render(request, 'surveillance/cameras.html')
 
@@ -142,7 +149,9 @@ def upload_person(request):
             img = form.cleaned_data.get('photo1')
             input_court_id = form.cleaned_data.get('court_id')
             if input_court_id in court_ids: 
+                #face_embedding = create_face_embedding(img)         #Get the face_embeddings from the uploaded image
                 obj = Target.objects.create(name=title, photo1=img, court_id = input_court_id)
+                #obj.set_embedding(face_embedding)                   #Save the embedding
                 obj.save()
                 messages.success(request, 'Details successfully uploaded')
             else:
@@ -155,6 +164,10 @@ def upload_person(request):
         
     return render(request, 'surveillance/upload.html', {'form': form,})
 
+@login_required
+def face_gallery(request):
+    details = Target.objects.all()
+    return render(request, 'surveillance/face_gallery.html', {'details': details})
 
 @login_required
 def Notifications(request):
