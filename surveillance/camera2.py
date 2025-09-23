@@ -6,6 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from queue import Queue, Empty
 from .models import Target, Logs
 
+# THIS SCIRPT DOES NOT RUN
 # Configuration
 URL = 'http://192.168.0.179:8080/video'
 PROCESSING_WIDTH = 500  # Lower for faster processing
@@ -131,4 +132,5 @@ def gen_frames2():
             if cap and cap.isOpened():
                 cap.release()
             executor.shutdown(wait=False)
+
             time.sleep(RECONNECT_DELAY)
