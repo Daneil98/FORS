@@ -7,7 +7,7 @@ import numpy as np
 import datetime
 from imutils import paths
 
-
+# THIS SCRIPT DOESN'T RUN
 
 def face_rec_setup():
     #Initialize face encodings and names list
@@ -110,4 +110,5 @@ def gun_detection(frame, gray):
         print("Guns detected")
         # Optional: Add additional handling logic here
         pass """
+
 
