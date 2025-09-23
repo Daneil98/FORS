@@ -23,4 +23,7 @@ urlpatterns = [
     path('Notifications/', views.Notifications, name='Notifications'),
     path('Logs/', views.logs, name='Logs'),
     path('view-image/', views.view_image, name='view_image'),
+    path('face_gallery/', views.face_gallery, name='face_gallery'),
+    path('tca/', views.threat_center, name='tca')
+    
 ]
