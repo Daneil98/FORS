@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Face Gallery{% endblock %}
+
+{% block content %}
+    <h1>Face Gallery</h1>
+
+    <p>Persons of Interest are displayed below:</p>
+
+    {% for detail in details %}
+        {% if detail.photo1 %}
+            <img src="{{ detail.photo1.url }}" alt="Detection Image" width="100">
+            
+        {% else %}
+            <span class="text-muted">No image</span>
+        {% endif %}
+
+        {% if detail.name %}
+            <p>{{ detail.name }}</p>
+        {% endif %}
+        <br>
+        <br>
+    {% empty %}
+        <p>No person of interest has been uploaded.</p>
+    {% endfor %}
+{% endblock %}
