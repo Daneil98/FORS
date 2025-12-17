@@ -8,6 +8,8 @@ The facial recognition & objection detection pipeline flowchart is at (https://g
 
 The Django System Achitecture diagram is at https://github.com/Daneil98/FORS/blob/master/Django%20System%20Architecture.png
 
+Images of the project's features/functionalities can be found in https://github.com/Daneil98/FORS/tree/master/Orion's%20Shield
+
 
 The weapon detection model was trained to detect the following classes for more granular data, effective response and threat contextual analysis:
 
